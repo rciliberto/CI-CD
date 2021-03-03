@@ -1,7 +1,7 @@
 FROM jenkins/jenkins
 
-ARG HOST_UID=1001
-ARG HOST_GID=999
+ARG DOCKER_UID=1000
+ARG DOCKER_GID=999
 
 USER root
 RUN apt-get -y update && \
@@ -14,8 +14,8 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-c
     chmod +x /usr/local/bin/docker-compose && \
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     
-RUN usermod -u $HOST_UID jenkins
-RUN groupmod -g $HOST_GID docker
+RUN usermod -u $DOCKER_UID jenkins
+RUN groupmod -g $DOCKER_GID docker
 RUN usermod -aG docker jenkins
 
 USER jenkins
