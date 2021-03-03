@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+    jenkins:
+        build:
+            context: ./
+            args:
+                HOST_UID: ${HOST_UID}
+                HOST_GID: ${HOST_GID}
+        container_name: jenkins
+        restart: always
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - jenkins_home:/var/jenkins_home
+        ports:
+            - "${HOST_WWW}:8080"
+            - "${HOST_OTHER}:50000"
+        expose:
+            - "${HOST_WWW}"
+            - "${HOST_OTHER}"
+volumes:
+    jenkins_home:
