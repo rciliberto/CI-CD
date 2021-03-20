@@ -31,7 +31,18 @@ services:
             - "9000"
         environment:
             - CAP_HOST_MANAGEMENT=1
-        
+    registry:
+        image: registry
+        container_name: registry
+        restart: always
+        volumes:
+            - registry_data:/var/lib/registry
+        ports:
+            - "5000:5000"
+        expose:
+            - "5000"
+
 volumes:
     jenkins_home:
     portainer_data:
+    registry_data:
